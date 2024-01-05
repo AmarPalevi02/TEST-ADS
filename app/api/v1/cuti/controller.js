@@ -1,27 +1,14 @@
 const { StatusCodes } = require('http-status-codes')
 const {
-    showAllKaryawan,
-    createKaryawan,
-    updateKaryawan,
-    deleteKaryawann,
-    getOneKaryawan
-} = require('../../../service/mysql/karyawan')
+    createCuti,
+    showAll,
+    updateCuti,
+    deleteCuti
+} = require('../../../service/mysql/cuti')
 
 const index = async (req, res, next) => {
     try {
-        const result = await showAllKaryawan()
-        res.status(StatusCodes.OK).json({
-            message: 'Successfully',
-            data: result
-        })
-    } catch (error) {
-        next(error)
-    }
-}
-
-const getOne = async (req, res, next) => {
-    try {
-        const result = await getOneKaryawan(req)
+        const result = await showAll()
         res.status(StatusCodes.OK).json({
             message: 'Successfully',
             data: result
@@ -33,7 +20,7 @@ const getOne = async (req, res, next) => {
 
 const create = async (req, res, next) => {
     try {
-        const result = await createKaryawan(req)
+        const result = await createCuti(req)
         res.status(StatusCodes.CREATED).json({
             message: 'Successfully',
             data: result
@@ -45,7 +32,7 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
     try {
-        const result = await updateKaryawan(req)
+        const result = await updateCuti(req)
         res.status(StatusCodes.OK).json({
             message: 'Update Successfully',
             data: result
@@ -57,7 +44,7 @@ const update = async (req, res, next) => {
 
 const destroy = async (req, res, next) => {
     try {
-        const result = await deleteKaryawann(req)
+        const result = await deleteCuti(req)
         res.status(StatusCodes.OK).json({
             message: 'Delete Successfully',
             data: result
@@ -68,9 +55,8 @@ const destroy = async (req, res, next) => {
 }
 
 module.exports = {
-    index,
     create,
+    index,
     update,
-    destroy,
-    getOne
+    destroy
 }

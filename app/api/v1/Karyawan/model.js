@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize");
+const Cuti = require('../cuti/model')
 const db = require('../../../configs/connection')
 
 const Karyawan = db.define('karyawan', {
@@ -70,6 +71,8 @@ const Karyawan = db.define('karyawan', {
         }
     }
 })
+
+Karyawan.hasMany(Cuti, { foreignKey: 'nomorInduk' })
 
 module.exports = Karyawan;
 

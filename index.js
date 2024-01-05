@@ -12,10 +12,12 @@ app.use(cors());
 app.use(express.json());
 
 const karyawanRouter = require('./app/api/v1/Karyawan/router')
+const cutiRouter = require('./app/api/v1/cuti/router')
 
 const v1 = '/api/v1'
 
 app.use(`${v1}/cms`, karyawanRouter)
+app.use(`${v1}/cms`, cutiRouter)
 
 app.use(errorHendelerMiddlewares)
 app.use(NotFound)

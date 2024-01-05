@@ -1,8 +1,25 @@
 const Karyawan = require('../../api/v1/Karyawan/model')
+const Cuti = require('../../api/v1/cuti/model')
 const { BadRequestError } = require('../../errors')
 
 const showAllKaryawan = async () => {
     const result = await Karyawan.findAll()
+
+    return result
+}
+
+const getOneKaryawan = async (req) => {
+    const { nomorInduk } = req.params
+
+    const checkNomorIInduk = await Karyawan.findByPk(nomorInduk)
+
+    if (!checkNomorIInduk) throw new BadRequestError(`Tidak ada Karyawan dengan nomor induk : ${nomorInduk}`)
+
+    const result = await Karyawan.findOne({
+        include: [
+            Cuti
+        ]
+    })
 
     return result
 }
@@ -65,5 +82,6 @@ module.exports = {
     createKaryawan,
     showAllKaryawan,
     updateKaryawan,
-    deleteKaryawann
+    deleteKaryawann,
+    getOneKaryawan
 }
